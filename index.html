@@ -1,0 +1,195 @@
+<html>
+    <head>
+
+        <style>
+
+            body {
+                font-family: sans-serif;
+                padding-bottom:5em;
+            }
+
+            main {
+                max-width: 38rem;
+                padding: 2rem;
+                margin: auto;
+            }
+        </style>
+    </head>
+    <body>
+        <main>
+                <h1>
+                    HTTP DB
+                </h1>
+                <p>
+                    http-db aims to provide simple interface for reading and writing various resources on http protocol.
+                </p>
+
+                <hr>
+
+                <section>
+                    <h2>How this works</h2>
+                    <p>
+                        Every unique URLs are like a file - you can save some content to a specific URL.
+                        And when <code>GET</code> request is made on that URL, you get the content back.
+                        To save, you make <code>POST/PUT</code> request to it, with body containing the content
+                        you'd like to save. Be it html, json, image, or whatever content type it supports.
+                        (currently it only supports <code>text/*</code> MIME types)
+                    </p>
+
+                    <hr>
+
+                    <section>
+                        <h3>Authentication</h3>
+                        <p>
+                            In order to use the http-db, majority of operations require authentication via 
+                            <code>Authorization</code> header in the request.
+
+                            However, you can request certain URLs to be publicly accessible.
+                        </p>
+                        <p>
+                            <small>
+                                    (Getting a token and making URL public needs manual operation from Kyu.)
+                            </small>
+                        </p>
+                        <p>
+                            Add the following header to the request.
+                        </p>
+
+                        <div style="margin: 2em 0;">
+                            <code style="margin:2em;">Authorization: Token [Your token]</code>
+                        </div>
+                    </section>
+
+                    <hr>
+
+                    <section>
+                        <h3>Writing resource</h3>
+                        <p>
+                            Writing data can be done via either <code>POST, PUT</code> request. <code>POST</code>
+                            request will attempt to create the resource. If the resource identified by URL exists
+                            already, it'll fail.
+                        </p>
+
+                        <div style="margin: 2em 0;">
+                            <pre style="margin:2em;">
+&gt; POST /hello HTTP/1.1
+&gt; Host: username.http-db.com
+&gt; Authorization: Token [your-authtoken]
+&gt; Content-Type: text/html
+
+hello world!
+                            </pre>
+                        </div>
+
+                        <p>
+                            The above call will create a new resource, at path <code>/hello</code>, with
+                            content <code>hello world!</code>, as <code>text/html</code> content type.
+
+                            So when you make a <code>GET</code> request to <code>https://username.http-db.com/hello</code>,
+                            You'll get a response body with <code>hello world!</code>, as <code>html</code>.
+                        </p>
+
+                        <p>
+                            <code>PUT</code> works the same way, however, it will not check for existence
+                            of the resource, it'll simply override it. And create the resource if it doesn't exist.
+                        </p>
+
+                    </section>
+
+                    <hr>
+
+                    <section>
+                        <h3>Reading resource</h3>
+                        <p>
+                            Reading data is a simple <code>GET</code> request, at the URL that you know exists.
+                            As you've expected, if the resource does not exist, it'll return <code>404</code>
+                            response.
+
+                            Remember, that by default, all requests must be made with <code>Authorization</code>
+                            header. Only by setting the specific resource public, the request will succeed without
+                            <code>Authorization</code> header.
+
+                            <small>(there is no way to do this by yourself now, please ask Kyu for it)</small>
+                        </p>
+
+                        <div style="margin: 2em 0;">
+                            <pre style="margin:2em;">
+&gt; GET /hello HTTP/1.1
+&gt; Host: username.http-db.com
+&gt; Authorization: Token [authtoken]                                        
+                            </pre>
+                        </div>
+
+                        <p>
+                            The request above will be responded with something like the following.
+                        </p>
+
+                        <div style="margin: 2em 0;">
+                                <pre style="margin:2em;">
+&lt; HTTP/1.1 200 OK
+&lt; Server: nginx/1.10.3
+&lt; Date: Tue, 09 Apr 2019 00:41:02 GMT
+&lt; Content-Type: text/html
+&lt; Content-Length: 12
+&lt; Connection: keep-alive
+
+hello world!                                                               
+                            </pre>
+                        </div>
+                    </section>
+                    <hr>
+                    <section>
+                        <h3>Deleting resource</h3>
+                        <p>
+                            Again, as you might have expected, deleting a resource is done via <code>DELETE</code> request.
+                            Make a request to the URL of the resource to remove it.
+                        </p>
+
+                        <div style="margin: 2em 0;">
+                            <pre style="margin:2em;">
+&gt; DELETE /hello HTTP/1.1
+&gt; Host: username.http-db.com
+&gt; Authorization: Token [authtoken]
+
+&lt; HTTP/1.1 200 OK
+&lt; Server: nginx/1.10.3
+&lt; Date: Tue, 09 Apr 2019 00:41:02 GMT
+&lt; Content-Type: text/plain
+&lt; Content-Length: 2
+&lt; Connection: keep-alive
+
+ok
+                            </pre>
+                        </div>
+                        
+                    </section>
+
+                </section>
+
+                <hr>
+
+                <section>
+                    <h2>
+                        Notice
+                    </h2>
+                    <p>
+                        If you are interested in trying this out, please email me at smailq@gmail.com.
+    
+                        This is currently in heavy development, so please use it at your own risk.
+                    </p>
+                </section>
+
+                <hr>
+
+                <section>
+                    <h2>Upcoming features and plans</h2>
+                    <p>
+                        I'm planning to make this a lot more interesting by adding "hooks".
+                        
+                    </p>
+                </section>
+                
+
+        </main>
+    </body>
+</html>
