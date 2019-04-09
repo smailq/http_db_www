@@ -48,7 +48,7 @@
                         </p>
                         <p>
                             <small>
-                                    (Getting a token and making URL public needs manual operation from Kyu.)
+                                    (Getting a token needs manual operation from Kyu.)
                             </small>
                         </p>
                         <p>
@@ -88,6 +88,16 @@ hello world!
                             So when you make a <code>GET</code> request to <code>https://username.http-db.com/hello</code>,
                             You'll get a response body with <code>hello world!</code>, as <code>html</code>.
                         </p>
+
+                        <h4>Options via query params</h4>
+                        
+                        <ul>
+                            <li>
+                                <code>make_public=true</code> - Will make new resource created with <code>POST</code> request
+                                will make <code>GET</code> request to succeed without <code>Authorization</code> header, making
+                                the resource publicly available without any authentication.
+                            </li>
+                        </ul>
 
                         <p>
                             <code>PUT</code> works the same way, however, it will not check for existence
