@@ -22,6 +22,20 @@
                 margin: 3em auto;
                 text-align: right;
             }
+
+            p {
+                padding-left:1em;
+            }
+
+            code {
+                background-color: lightgoldenrodyellow;
+            }
+
+            pre.code {
+                margin: 1.5em;
+                padding: 1.5em;
+                background-color: aliceblue;
+            }
         </style>
     </head>
     <body>
@@ -64,9 +78,9 @@
                             Add the following header to the request.
                         </p>
 
-                        <div style="margin: 2em 0;">
-                            <code style="margin:2em;">Authorization: Token [Your token]</code>
-                        </div>
+                        
+                        <pre class="code">Authorization: Token [Your token]</code>
+                        
                     </section>
 
                     <hr>
@@ -79,16 +93,16 @@
                             already, it'll fail.
                         </p>
 
-                        <div style="margin: 2em 0;">
-                            <pre style="margin:2em;">
+                        
+                        <pre class="code">
 &gt; POST /hello HTTP/1.1
 &gt; Host: username.http-db.com
 &gt; Authorization: Token [your-authtoken]
 &gt; Content-Type: text/html
 
 hello world!
-                            </pre>
-                        </div>
+                        </pre>
+                        
 
                         <p>
                             The above call will create a new resource, at path <code>/hello</code>, with
@@ -129,20 +143,20 @@ hello world!
                             <code>Authorization</code> header.
                         </p>
 
-                        <div style="margin: 2em 0;">
-                            <pre style="margin:2em;">
+                        
+                        <pre  class="code">
 &gt; GET /hello HTTP/1.1
 &gt; Host: username.http-db.com
 &gt; Authorization: Token [authtoken]                                        
-                            </pre>
-                        </div>
+                        </pre>
+                        
 
                         <p>
                             The request above will be responded with something like the following.
                         </p>
 
-                        <div style="margin: 2em 0;">
-                                <pre style="margin:2em;">
+                        
+                        <pre class="code">
 &lt; HTTP/1.1 200 OK
 &lt; Server: nginx/1.10.3
 &lt; Date: Tue, 09 Apr 2019 00:41:02 GMT
@@ -151,8 +165,8 @@ hello world!
 &lt; Connection: keep-alive
 
 hello world!                                                               
-                            </pre>
-                        </div>
+                        </pre>
+                        
                     </section>
                     <hr>
                     <section>
@@ -162,8 +176,8 @@ hello world!
                             Make a request to the URL of the resource to remove it.
                         </p>
 
-                        <div style="margin: 2em 0;">
-                            <pre style="margin:2em;">
+                        
+                        <pre  class="code">
 &gt; DELETE /hello HTTP/1.1
 &gt; Host: username.http-db.com
 &gt; Authorization: Token [authtoken]
@@ -176,8 +190,8 @@ hello world!
 &lt; Connection: keep-alive
 
 ok
-                            </pre>
-                        </div>
+                        </pre>
+                        
                         
                     </section>
 
@@ -201,11 +215,28 @@ ok
                         <li>Add tests</li>
                         <li>Add auth token scope with respect to path</li>
                         <li>Endpoint for creating new auth token</li>
-                        <li>Refacotring</li>
-                        <li>Deployment automation(deployment without downtime)</li>
+                        <li>Refacotring of key data read/write operations and authentication</li>
+                        <li>Deployment automation(0 downtime), with "production" quality setup</li>
                         <li>Git integration</li>
                         <li>Hook interface</li>
+                        <li>Load testing</li>
+                        <li>Resource monitoring</li>
+                        <li>Resource limits</li>
+                        <li>Service monitoring on 3rd party site & uptime, and incident reporting</li>
                     </ul>
+
+                    <p>
+                        <small>This list is updated regularly. And note that the priority might change time to time.</small>
+                    </p>
+
+                    <h4>
+                        Completed
+                    </h4>
+                    <h5>Wed, 10 Apr 2019</h5>
+                    <ul>
+                        <li>Query param for making new resource public</li>
+                    </ul>
+                    
                 </section>
                 
                 <hr>
